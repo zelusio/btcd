@@ -9,8 +9,8 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/btcsuite/btcd/chaincfg"
-	"github.com/btcsuite/btcd/database"
+	"github.com/martinboehm/btcd/chaincfg"
+	"github.com/martinboehm/btcd/database"
 	"github.com/btcsuite/btcutil"
 )
 

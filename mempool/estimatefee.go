@@ -16,8 +16,8 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/btcsuite/btcd/chaincfg/chainhash"
-	"github.com/btcsuite/btcd/mining"
+	"github.com/martinboehm/btcd/chaincfg/chainhash"
+	"github.com/martinboehm/btcd/mining"
 	"github.com/btcsuite/btcutil"
 )
 

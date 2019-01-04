@@ -9,11 +9,11 @@ import (
 	"testing"
 	"time"
 
-	"github.com/btcsuite/btcd/btcec"
-	"github.com/btcsuite/btcd/chaincfg"
-	"github.com/btcsuite/btcd/chaincfg/chainhash"
-	"github.com/btcsuite/btcd/txscript"
-	"github.com/btcsuite/btcd/wire"
+	"github.com/martinboehm/btcd/btcec"
+	"github.com/martinboehm/btcd/chaincfg"
+	"github.com/martinboehm/btcd/chaincfg/chainhash"
+	"github.com/martinboehm/btcd/txscript"
+	"github.com/martinboehm/btcd/wire"
 	"github.com/btcsuite/btcutil"
 )
 

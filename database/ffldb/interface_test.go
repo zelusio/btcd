@@ -25,10 +25,10 @@ import (
 	"testing"
 	"time"
 
-	"github.com/btcsuite/btcd/chaincfg"
-	"github.com/btcsuite/btcd/chaincfg/chainhash"
-	"github.com/btcsuite/btcd/database"
-	"github.com/btcsuite/btcd/wire"
+	"github.com/martinboehm/btcd/chaincfg"
+	"github.com/martinboehm/btcd/chaincfg/chainhash"
+	"github.com/martinboehm/btcd/database"
+	"github.com/martinboehm/btcd/wire"
 	"github.com/btcsuite/btcutil"
 )
 

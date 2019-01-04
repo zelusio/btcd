@@ -63,7 +63,7 @@ recommended that `GOPATH` is set to a directory in your home directory such as
 - Run the following commands to obtain btcd, all dependencies, and install it:
 
 ```bash
-$ cd $GOPATH/src/github.com/btcsuite/btcd
+$ cd $GOPATH/src/github.com/martinboehm/btcd
 $ GO111MODULE=on go install -v . ./cmd/...
 ```
 
@@ -82,7 +82,7 @@ Install a newer MSI
 - Run the following commands to update btcd, all dependencies, and install it:
 
 ```bash
-$ cd $GOPATH/src/github.com/btcsuite/btcd
+$ cd $GOPATH/src/github.com/martinboehm/btcd
 $ git pull
 $ GO111MODULE=on go install -v . ./cmd/...
 ```

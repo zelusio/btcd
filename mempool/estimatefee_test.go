@@ -9,9 +9,9 @@ import (
 	"math/rand"
 	"testing"
 
-	"github.com/btcsuite/btcd/chaincfg/chainhash"
-	"github.com/btcsuite/btcd/mining"
-	"github.com/btcsuite/btcd/wire"
+	"github.com/martinboehm/btcd/chaincfg/chainhash"
+	"github.com/martinboehm/btcd/mining"
+	"github.com/martinboehm/btcd/wire"
 	"github.com/btcsuite/btcutil"
 )
 

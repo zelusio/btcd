@@ -96,8 +96,8 @@ recommended that `GOPATH` is set to a directory in your home directory such as
 
 ```bash
 $ go get -u github.com/Masterminds/glide
-$ git clone https://github.com/btcsuite/btcd $GOPATH/src/github.com/btcsuite/btcd
-$ cd $GOPATH/src/github.com/btcsuite/btcd
+$ git clone https://github.com/ $GOPATH/src/github.com/
+$ cd $GOPATH/src/github.com/
 $ glide install
 $ go install . ./cmd/...
 ```
@@ -111,7 +111,7 @@ $ go install . ./cmd/...
 - Run the following commands to update btcd, all dependencies, and install it:
 
 ```bash
-$ cd $GOPATH/src/github.com/btcsuite/btcd
+$ cd $GOPATH/src/github.com/
 $ git pull && glide install
 $ go install . ./cmd/...
 ```

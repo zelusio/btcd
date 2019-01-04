@@ -14,7 +14,7 @@ import (
 	"runtime"
 	"time"
 
-	rpc "github.com/btcsuite/btcd/rpcclient"
+	rpc "github.com/martinboehm/btcd/rpcclient"
 	"github.com/btcsuite/btcutil"
 )
 

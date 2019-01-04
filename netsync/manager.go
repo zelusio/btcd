@@ -11,13 +11,13 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/btcsuite/btcd/blockchain"
-	"github.com/btcsuite/btcd/chaincfg"
-	"github.com/btcsuite/btcd/chaincfg/chainhash"
-	"github.com/btcsuite/btcd/database"
-	"github.com/btcsuite/btcd/mempool"
-	peerpkg "github.com/btcsuite/btcd/peer"
-	"github.com/btcsuite/btcd/wire"
+	"github.com/martinboehm/btcd/blockchain"
+	"github.com/martinboehm/btcd/chaincfg"
+	"github.com/martinboehm/btcd/chaincfg/chainhash"
+	"github.com/martinboehm/btcd/database"
+	"github.com/martinboehm/btcd/mempool"
+	peerpkg "github.com/martinboehm/btcd/peer"
+	"github.com/martinboehm/btcd/wire"
 	"github.com/btcsuite/btcutil"
 )
 
