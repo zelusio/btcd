@@ -15,7 +15,7 @@ import (
 	"github.com/martinboehm/btcd/chaincfg/chainhash"
 	"github.com/martinboehm/btcd/database"
 	"github.com/martinboehm/btcd/wire"
-	"github.com/btcsuite/btcutil"
+	"github.com/martinboehm/btcutil"
 )
 
 const (

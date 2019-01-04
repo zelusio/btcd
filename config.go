@@ -28,7 +28,7 @@ import (
 	_ "github.com/martinboehm/btcd/database/ffldb"
 	"github.com/martinboehm/btcd/mempool"
 	"github.com/martinboehm/btcd/peer"
-	"github.com/btcsuite/btcutil"
+	"github.com/martinboehm/btcutil"
 	"github.com/btcsuite/go-socks/socks"
 	flags "github.com/jessevdk/go-flags"
 )

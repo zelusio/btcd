@@ -18,7 +18,7 @@ import (
 	"github.com/martinboehm/btcd/database"
 	"github.com/martinboehm/btcd/database/internal/treap"
 	"github.com/martinboehm/btcd/wire"
-	"github.com/btcsuite/btcutil"
+	"github.com/martinboehm/btcutil"
 	"github.com/btcsuite/goleveldb/leveldb"
 	"github.com/btcsuite/goleveldb/leveldb/comparer"
 	ldberrors "github.com/btcsuite/goleveldb/leveldb/errors"

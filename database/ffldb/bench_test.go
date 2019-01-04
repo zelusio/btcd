@@ -11,7 +11,7 @@ import (
 
 	"github.com/martinboehm/btcd/chaincfg"
 	"github.com/martinboehm/btcd/database"
-	"github.com/btcsuite/btcutil"
+	"github.com/martinboehm/btcutil"
 )
 
 // BenchmarkBlockHeader benchmarks how long it takes to load the mainnet genesis

@@ -12,9 +12,9 @@ import (
 	"github.com/martinboehm/btcd/chaincfg/chainhash"
 	"github.com/martinboehm/btcd/database"
 	"github.com/martinboehm/btcd/wire"
-	"github.com/btcsuite/btcutil"
-	"github.com/btcsuite/btcutil/gcs"
-	"github.com/btcsuite/btcutil/gcs/builder"
+	"github.com/martinboehm/btcutil"
+	"github.com/martinboehm/btcutil/gcs"
+	"github.com/martinboehm/btcutil/gcs/builder"
 )
 
 const (

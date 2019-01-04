@@ -21,7 +21,7 @@ import (
 	"github.com/martinboehm/btcd/integration/rpctest"
 	"github.com/martinboehm/btcd/txscript"
 	"github.com/martinboehm/btcd/wire"
-	"github.com/btcsuite/btcutil"
+	"github.com/martinboehm/btcutil"
 )
 
 const (

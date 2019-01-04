@@ -13,7 +13,7 @@ import (
 
 	"github.com/martinboehm/btcd/blockchain"
 	"github.com/martinboehm/btcd/database"
-	"github.com/btcsuite/btcutil"
+	"github.com/martinboehm/btcutil"
 )
 
 var (

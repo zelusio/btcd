@@ -11,7 +11,7 @@ import (
 	"github.com/martinboehm/btcd/database"
 	"github.com/martinboehm/btcd/txscript"
 	"github.com/martinboehm/btcd/wire"
-	"github.com/btcsuite/btcutil"
+	"github.com/martinboehm/btcutil"
 )
 
 // txoFlags is a bitmask defining additional information and state for a

@@ -40,7 +40,7 @@ import (
 	"github.com/martinboehm/btcd/peer"
 	"github.com/martinboehm/btcd/txscript"
 	"github.com/martinboehm/btcd/wire"
-	"github.com/btcsuite/btcutil"
+	"github.com/martinboehm/btcutil"
 	"github.com/btcsuite/websocket"
 )
 

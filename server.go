@@ -36,8 +36,8 @@ import (
 	"github.com/martinboehm/btcd/peer"
 	"github.com/martinboehm/btcd/txscript"
 	"github.com/martinboehm/btcd/wire"
-	"github.com/btcsuite/btcutil"
-	"github.com/btcsuite/btcutil/bloom"
+	"github.com/martinboehm/btcutil"
+	"github.com/martinboehm/btcutil/bloom"
 )
 
 const (
