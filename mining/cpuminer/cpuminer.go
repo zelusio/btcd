@@ -13,11 +13,11 @@ import (
 	"time"
 
 	"github.com/martinboehm/btcd/blockchain"
-	"github.com/martinboehm/btcd/chaincfg"
 	"github.com/martinboehm/btcd/chaincfg/chainhash"
 	"github.com/martinboehm/btcd/mining"
 	"github.com/martinboehm/btcd/wire"
 	"github.com/martinboehm/btcutil"
+	"github.com/martinboehm/btcutil/chaincfg"
 )
 
 const (

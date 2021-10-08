@@ -10,8 +10,8 @@ import (
 	"net"
 	"net/http"
 
-	"github.com/martinboehm/btcd/btcjson"
 	"github.com/btcsuite/go-socks/socks"
+	"github.com/martinboehm/btcd/btcjson"
 )
 
 // newHTTPClient returns a new HTTP client that is configured according to the

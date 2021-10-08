@@ -10,10 +10,10 @@ import (
 	"testing"
 
 	"github.com/martinboehm/btcd/btcec"
-	"github.com/martinboehm/btcd/chaincfg"
 	"github.com/martinboehm/btcd/chaincfg/chainhash"
 	"github.com/martinboehm/btcd/wire"
 	"github.com/martinboehm/btcutil"
+	"github.com/martinboehm/btcutil/chaincfg"
 )
 
 type addressToKey struct {

@@ -7,13 +7,12 @@ package main
 import (
 	"os"
 	"path/filepath"
-	"runtime"
 
+	"github.com/btcsuite/btclog"
 	"github.com/martinboehm/btcd/blockchain"
 	"github.com/martinboehm/btcd/blockchain/indexers"
 	"github.com/martinboehm/btcd/database"
 	"github.com/martinboehm/btcd/limits"
-	"github.com/btcsuite/btclog"
 )
 
 const (
@@ -119,8 +118,7 @@ func realMain() error {
 }
 
 func main() {
-	// Use all processor cores and up some limits.
-	runtime.GOMAXPROCS(runtime.NumCPU())
+	// up some limits.
 	if err := limits.SetLimits(); err != nil {
 		os.Exit(1)
 	}

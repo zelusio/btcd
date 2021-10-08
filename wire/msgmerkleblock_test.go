@@ -12,8 +12,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/martinboehm/btcd/chaincfg/chainhash"
 	"github.com/davecgh/go-spew/spew"
+	"github.com/martinboehm/btcd/chaincfg/chainhash"
 )
 
 // TestMerkleBlock tests the MsgMerkleBlock API.
@@ -38,7 +38,8 @@ func TestMerkleBlock(t *testing.T) {
 
 	// Ensure max payload is expected value for latest protocol version.
 	// Num addresses (varInt) + max allowed addresses.
-	wantPayload := uint32(4000000)
+	// adjust the wantPayload to the enlarged MaxBlockPayload in this fork
+	wantPayload := uint32(1 << 30)
 	maxPayload := msg.MaxPayloadLength(pver)
 	if maxPayload != wantPayload {
 		t.Errorf("MaxPayloadLength: wrong max payload length for "+

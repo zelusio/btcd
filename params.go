@@ -5,8 +5,8 @@
 package main
 
 import (
-	"github.com/martinboehm/btcd/chaincfg"
 	"github.com/martinboehm/btcd/wire"
+	"github.com/martinboehm/btcutil/chaincfg"
 )
 
 // activeNetParams is a pointer to the parameters specific to the
@@ -53,6 +53,13 @@ var testNet3Params = params{
 var simNetParams = params{
 	Params:  &chaincfg.SimNetParams,
 	rpcPort: "18556",
+}
+
+// sigNetParams contains parameters specific to the Signet network
+// (wire.SigNet).
+var sigNetParams = params{
+	Params:  &chaincfg.SigNetParams,
+	rpcPort: "38332",
 }
 
 // netName returns the name used when referring to a bitcoin network.  At the

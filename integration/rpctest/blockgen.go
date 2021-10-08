@@ -12,11 +12,12 @@ import (
 	"time"
 
 	"github.com/martinboehm/btcd/blockchain"
-	"github.com/martinboehm/btcd/chaincfg"
 	"github.com/martinboehm/btcd/chaincfg/chainhash"
+	"github.com/martinboehm/btcd/mining"
 	"github.com/martinboehm/btcd/txscript"
 	"github.com/martinboehm/btcd/wire"
 	"github.com/martinboehm/btcutil"
+	"github.com/martinboehm/btcutil/chaincfg"
 )
 
 // solveBlock attempts to find a nonce which makes the passed block header hash
@@ -181,6 +182,21 @@ func CreateBlock(prevBlock *btcutil.Block, inclusionTxs []*btcutil.Tx,
 	if inclusionTxs != nil {
 		blockTxns = append(blockTxns, inclusionTxs...)
 	}
+
+	// We must add the witness commitment to the coinbase if any
+	// transactions are segwit.
+	witnessIncluded := false
+	for i := 1; i < len(blockTxns); i++ {
+		if blockTxns[i].MsgTx().HasWitness() {
+			witnessIncluded = true
+			break
+		}
+	}
+
+	if witnessIncluded {
+		_ = mining.AddWitnessCommitment(coinbaseTx, blockTxns)
+	}
+
 	merkles := blockchain.BuildMerkleTreeStore(blockTxns, false)
 	var block wire.MsgBlock
 	block.Header = wire.BlockHeader{

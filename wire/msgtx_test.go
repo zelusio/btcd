@@ -11,8 +11,8 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/martinboehm/btcd/chaincfg/chainhash"
 	"github.com/davecgh/go-spew/spew"
+	"github.com/martinboehm/btcd/chaincfg/chainhash"
 )
 
 // TestTx tests the MsgTx API.
@@ -35,7 +35,8 @@ func TestTx(t *testing.T) {
 	}
 
 	// Ensure max payload is expected value for latest protocol version.
-	wantPayload := uint32(1000 * 4000)
+	// adjust the wantPayload to the enlarged MaxBlockPayload in this fork
+	wantPayload := uint32(1 << 30)
 	maxPayload := msg.MaxPayloadLength(pver)
 	if maxPayload != wantPayload {
 		t.Errorf("MaxPayloadLength: wrong max payload length for "+
@@ -935,9 +936,9 @@ var multiWitnessTx = &MsgTx{
 // tests.
 var multiWitnessTxEncoded = []byte{
 	0x1, 0x0, 0x0, 0x0, // Version
-	0x0, // Marker byte indicating 0 inputs, or a segwit encoded tx
-	0x1, // Flag byte
-	0x1, // Varint for number of inputs
+	TxFlagMarker, // Marker byte indicating 0 inputs, or a segwit encoded tx
+	WitnessFlag,  // Flag byte
+	0x1,          // Varint for number of inputs
 	0xa5, 0x33, 0x52, 0xd5, 0x13, 0x57, 0x66, 0xf0,
 	0x30, 0x76, 0x59, 0x74, 0x18, 0x26, 0x3d, 0xa2,
 	0xd9, 0xc9, 0x58, 0x31, 0x59, 0x68, 0xfe, 0xa8,
@@ -978,9 +979,9 @@ var multiWitnessTxEncoded = []byte{
 // being set to 0x01, the flag is 0x00, which should trigger a decoding error.
 var multiWitnessTxEncodedNonZeroFlag = []byte{
 	0x1, 0x0, 0x0, 0x0, // Version
-	0x0, // Marker byte indicating 0 inputs, or a segwit encoded tx
-	0x0, // Incorrect flag byte (should be 0x01)
-	0x1, // Varint for number of inputs
+	TxFlagMarker, // Marker byte indicating 0 inputs, or a segwit encoded tx
+	0x0,          // Incorrect flag byte (should be 0x01)
+	0x1,          // Varint for number of inputs
 	0xa5, 0x33, 0x52, 0xd5, 0x13, 0x57, 0x66, 0xf0,
 	0x30, 0x76, 0x59, 0x74, 0x18, 0x26, 0x3d, 0xa2,
 	0xd9, 0xc9, 0x58, 0x31, 0x59, 0x68, 0xfe, 0xa8,

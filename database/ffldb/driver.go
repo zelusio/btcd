@@ -7,9 +7,9 @@ package ffldb
 import (
 	"fmt"
 
+	"github.com/btcsuite/btclog"
 	"github.com/martinboehm/btcd/database"
 	"github.com/martinboehm/btcd/wire"
-	"github.com/btcsuite/btclog"
 )
 
 var log = btclog.Disabled

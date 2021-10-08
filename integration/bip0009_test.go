@@ -3,6 +3,7 @@
 // license that can be found in the LICENSE file.
 
 // This file is ignored during the regular tests due to the following build tag.
+//go:build rpctest
 // +build rpctest
 
 package integration
@@ -14,9 +15,9 @@ import (
 	"time"
 
 	"github.com/martinboehm/btcd/blockchain"
-	"github.com/martinboehm/btcd/chaincfg"
 	"github.com/martinboehm/btcd/chaincfg/chainhash"
 	"github.com/martinboehm/btcd/integration/rpctest"
+	"github.com/martinboehm/btcutil/chaincfg"
 )
 
 const (
@@ -33,7 +34,7 @@ const (
 // ensures its version either has the provided bit set or unset per the set
 // flag.
 func assertVersionBit(r *rpctest.Harness, t *testing.T, hash *chainhash.Hash, bit uint8, set bool) {
-	block, err := r.Node.GetBlock(hash)
+	block, err := r.Client.GetBlock(hash)
 	if err != nil {
 		t.Fatalf("failed to retrieve block %v: %v", hash, err)
 	}
@@ -53,7 +54,7 @@ func assertVersionBit(r *rpctest.Harness, t *testing.T, hash *chainhash.Hash, bi
 // assertChainHeight retrieves the current chain height from the given test
 // harness and ensures it matches the provided expected height.
 func assertChainHeight(r *rpctest.Harness, t *testing.T, expectedHeight uint32) {
-	height, err := r.Node.GetBlockCount()
+	height, err := r.Client.GetBlockCount()
 	if err != nil {
 		t.Fatalf("failed to retrieve block height: %v", err)
 	}
@@ -96,13 +97,13 @@ func assertSoftForkStatus(r *rpctest.Harness, t *testing.T, forkKey string, stat
 			"threshold state %v to string", line, state)
 	}
 
-	info, err := r.Node.GetBlockChainInfo()
+	info, err := r.Client.GetBlockChainInfo()
 	if err != nil {
 		t.Fatalf("failed to retrieve chain info: %v", err)
 	}
 
 	// Ensure the key is available.
-	desc, ok := info.Bip9SoftForks[forkKey]
+	desc, ok := info.SoftForks.Bip9SoftForks[forkKey]
 	if !ok {
 		_, _, line, _ := runtime.Caller(1)
 		t.Fatalf("assertion failed at line %d: softfork status for %q "+
@@ -129,7 +130,7 @@ func assertSoftForkStatus(r *rpctest.Harness, t *testing.T, forkKey string, stat
 // specific soft fork deployment to test.
 func testBIP0009(t *testing.T, forkKey string, deploymentID uint32) {
 	// Initialize the primary mining node with only the genesis block.
-	r, err := rpctest.New(&chaincfg.RegressionNetParams, nil, nil)
+	r, err := rpctest.New(&chaincfg.RegressionNetParams, nil, nil, "")
 	if err != nil {
 		t.Fatalf("unable to create primary harness: %v", err)
 	}
@@ -320,7 +321,7 @@ func TestBIP0009Mining(t *testing.T) {
 	t.Parallel()
 
 	// Initialize the primary mining node with only the genesis block.
-	r, err := rpctest.New(&chaincfg.SimNetParams, nil, nil)
+	r, err := rpctest.New(&chaincfg.SimNetParams, nil, nil, "")
 	if err != nil {
 		t.Fatalf("unable to create primary harness: %v", err)
 	}
@@ -339,7 +340,7 @@ func TestBIP0009Mining(t *testing.T) {
 	// in the defined threshold state.
 	deployment := &r.ActiveNet.Deployments[chaincfg.DeploymentTestDummy]
 	testDummyBitNum := deployment.BitNumber
-	hashes, err := r.Node.Generate(1)
+	hashes, err := r.Client.Generate(1)
 	if err != nil {
 		t.Fatalf("unable to generate blocks: %v", err)
 	}
@@ -358,7 +359,7 @@ func TestBIP0009Mining(t *testing.T) {
 	// dummy deployment as started.
 	confirmationWindow := r.ActiveNet.MinerConfirmationWindow
 	numNeeded := confirmationWindow - 1
-	hashes, err = r.Node.Generate(numNeeded)
+	hashes, err = r.Client.Generate(numNeeded)
 	if err != nil {
 		t.Fatalf("failed to generated %d blocks: %v", numNeeded, err)
 	}
@@ -373,7 +374,7 @@ func TestBIP0009Mining(t *testing.T) {
 	// The last generated block should still have the test bit set in the
 	// version since the btcd mining code will have recognized the test
 	// dummy deployment as locked in.
-	hashes, err = r.Node.Generate(confirmationWindow)
+	hashes, err = r.Client.Generate(confirmationWindow)
 	if err != nil {
 		t.Fatalf("failed to generated %d blocks: %v", confirmationWindow,
 			err)
@@ -392,7 +393,7 @@ func TestBIP0009Mining(t *testing.T) {
 	// version since the btcd mining code will have recognized the test
 	// dummy deployment as activated and thus there is no longer any need
 	// to set the bit.
-	hashes, err = r.Node.Generate(confirmationWindow)
+	hashes, err = r.Client.Generate(confirmationWindow)
 	if err != nil {
 		t.Fatalf("failed to generated %d blocks: %v", confirmationWindow,
 			err)

@@ -7,12 +7,11 @@ package main
 import (
 	"os"
 	"path/filepath"
-	"runtime"
 	"strings"
 
-	"github.com/martinboehm/btcd/database"
 	"github.com/btcsuite/btclog"
 	flags "github.com/jessevdk/go-flags"
+	"github.com/martinboehm/btcd/database"
 )
 
 const (
@@ -106,9 +105,6 @@ func realMain() error {
 }
 
 func main() {
-	// Use all processor cores.
-	runtime.GOMAXPROCS(runtime.NumCPU())
-
 	// Work around defer not working after os.Exit()
 	if err := realMain(); err != nil {
 		os.Exit(1)

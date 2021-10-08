@@ -14,11 +14,6 @@ import (
 	"sort"
 	"sync"
 
-	"github.com/martinboehm/btcd/chaincfg/chainhash"
-	"github.com/martinboehm/btcd/database"
-	"github.com/martinboehm/btcd/database/internal/treap"
-	"github.com/martinboehm/btcd/wire"
-	"github.com/martinboehm/btcutil"
 	"github.com/btcsuite/goleveldb/leveldb"
 	"github.com/btcsuite/goleveldb/leveldb/comparer"
 	ldberrors "github.com/btcsuite/goleveldb/leveldb/errors"
@@ -26,6 +21,11 @@ import (
 	"github.com/btcsuite/goleveldb/leveldb/iterator"
 	"github.com/btcsuite/goleveldb/leveldb/opt"
 	"github.com/btcsuite/goleveldb/leveldb/util"
+	"github.com/martinboehm/btcd/chaincfg/chainhash"
+	"github.com/martinboehm/btcd/database"
+	"github.com/martinboehm/btcd/database/internal/treap"
+	"github.com/martinboehm/btcd/wire"
+	"github.com/martinboehm/btcutil"
 )
 
 const (
@@ -950,7 +950,7 @@ type pendingBlock struct {
 }
 
 // transaction represents a database transaction.  It can either be read-only or
-// read-write and implements the database.Bucket interface.  The transaction
+// read-write and implements the database.Tx interface.  The transaction
 // provides a root bucket against which all read and writes occur.
 type transaction struct {
 	managed        bool             // Is the transaction managed?

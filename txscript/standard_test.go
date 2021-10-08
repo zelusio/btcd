@@ -1,4 +1,4 @@
-// Copyright (c) 2013-2017 The btcsuite developers
+// Copyright (c) 2013-2020 The btcsuite developers
 // Use of this source code is governed by an ISC
 // license that can be found in the LICENSE file.
 
@@ -7,12 +7,13 @@ package txscript
 import (
 	"bytes"
 	"encoding/hex"
+	"errors"
 	"reflect"
 	"testing"
 
-	"github.com/martinboehm/btcd/chaincfg"
 	"github.com/martinboehm/btcd/wire"
 	"github.com/martinboehm/btcutil"
+	"github.com/martinboehm/btcutil/chaincfg"
 )
 
 // mustParseShortForm parses the passed short form script and returns the
@@ -1211,5 +1212,42 @@ func TestNullDataScript(t *testing.T) {
 				test.class)
 			continue
 		}
+	}
+}
+
+// TestNewScriptClass tests whether NewScriptClass returns a valid ScriptClass.
+func TestNewScriptClass(t *testing.T) {
+	tests := []struct {
+		name       string
+		scriptName string
+		want       *ScriptClass
+		wantErr    error
+	}{
+		{
+			name:       "NewScriptClass - ok",
+			scriptName: NullDataTy.String(),
+			want: func() *ScriptClass {
+				s := NullDataTy
+				return &s
+			}(),
+		},
+		{
+			name:       "NewScriptClass - invalid",
+			scriptName: "foo",
+			wantErr:    ErrUnsupportedScriptType,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			got, err := NewScriptClass(tt.scriptName)
+			if err != nil && !errors.Is(err, tt.wantErr) {
+				t.Errorf("NewScriptClass() error = %v, wantErr %v", err, tt.wantErr)
+				return
+			}
+
+			if !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("NewScriptClass() got = %v, want %v", got, tt.want)
+			}
+		})
 	}
 }

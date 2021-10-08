@@ -8,11 +8,11 @@ import (
 	"errors"
 
 	"github.com/martinboehm/btcd/blockchain"
-	"github.com/martinboehm/btcd/chaincfg"
 	"github.com/martinboehm/btcd/chaincfg/chainhash"
 	"github.com/martinboehm/btcd/database"
 	"github.com/martinboehm/btcd/wire"
 	"github.com/martinboehm/btcutil"
+	"github.com/martinboehm/btcutil/chaincfg"
 	"github.com/martinboehm/btcutil/gcs"
 	"github.com/martinboehm/btcutil/gcs/builder"
 )
