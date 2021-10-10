@@ -69,7 +69,7 @@ func ParseSchnorrPubKey(pubKeyStr []byte) (*SchnorrPublicKey, error) {
 	x := new(big.Int)
 	x.SetBytes(pubKeyStr)
 
-	Px, Py, err := liftX(pubKeyStr)
+	Px, Py, err := LiftX(pubKeyStr)
 	if err != nil {
 		return nil, fmt.Errorf("invalid pubkey")
 	}
@@ -204,11 +204,12 @@ func schnorrSign(privKey, msg []byte, a []byte) (sig [64]byte, err error) {
 	return sig, nil
 }
 
-func liftX(key []byte) (*big.Int, *big.Int, error) {
+func LiftX(key []byte) (*big.Int, *big.Int, error) {
 	x := new(big.Int).SetBytes(key)
+	curve := S256()
 
 	// p is field size.
-	p := S256().P
+	p := curve.P
 
 	if x.Cmp(p) >= 0 {
 		return nil, nil, errCoordinateAtInf
@@ -222,9 +223,7 @@ func liftX(key []byte) (*big.Int, *big.Int, error) {
 
 	// y = c^((p+1)/4) mod P.
 	y := new(big.Int)
-	y.Add(p, one)
-	y.Div(y, four)
-	y.Exp(c, y, p)
+	y.Exp(c, curve.Q(), p)
 
 	if new(big.Int).And(y, one).Cmp(zero) != 0 {
 		y.Sub(p, y)
@@ -260,7 +259,7 @@ func schnorrVerify(msg, publicKey, signature []byte) (bool, error) {
 	e := new(big.Int)
 
 	// Get Point P from the x-coordinate.
-	Px, Py, err := liftX(publicKey[:])
+	Px, Py, err := LiftX(publicKey[:])
 	if err != nil {
 		return false, err
 	}
