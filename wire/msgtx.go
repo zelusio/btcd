@@ -103,12 +103,9 @@ const (
 	maxWitnessItemsPerInput = 500000
 
 	// maxWitnessItemSize is the maximum allowed size for an item within
-	// an input's witness data. This number is derived from the fact that
-	// for script validation, each pushed item onto the stack must be less
-	// than 10k bytes. It was originally set to 11000, however bitcoin testnet
-	// transaction 44692bc2da73192cd0b89bc7a43c0ce43578f6b3567bc945e46e6952e8ec5ca5 has witness size 396669 so it is necessary to set it to
-	// a higher value
-	maxWitnessItemSize = 500000
+	// an input's witness data. This value is bounded by the largest
+	// possible block size, post segwit v1 (taproot).
+	maxWitnessItemSize = 4_000_000
 )
 
 // TxFlagMarker is the first byte of the FLAG field in a bitcoin tx
