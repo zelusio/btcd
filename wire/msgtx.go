@@ -314,6 +314,7 @@ func NewTxOut(value int64, pkScript []byte) *TxOut {
 // inputs and outputs.
 type MsgTx struct {
 	Version  int32
+	Hex      string // BLOC-194, added structure to pass Hex value for Tx serialization
 	TxIn     []*TxIn
 	TxOut    []*TxOut
 	LockTime uint32
